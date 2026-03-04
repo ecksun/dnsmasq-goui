@@ -24,11 +24,6 @@ PrivateTmp=true
 
 # Network settings
 RestrictAddressFamilies=AF_INET AF_INET6
-IPAddressDeny=any
-IPAddressAllow=localhost
-IPAddressAllow=10.0.0.0/8
-IPAddressAllow=172.16.0.0/12
-IPAddressAllow=192.168.0.0/16
 
 # File system access
 BindReadOnlyPaths=/var/lib/misc/dnsmasq.leases
