@@ -43,6 +43,11 @@ release: $(GH) $(PACKAGE_DIR).deb $(OUT_DIR)/$(NAME)
 		"$(PACKAGE_DIR).deb" \
 		"$(OUT_DIR)/$(NAME)"
 
+screenshot.png: leases.screenshot
+	timeout 2s go run ./ --leases ./leases.screenshot --listen :18080 &
+	chromium --headless --no-sandbox --disable-gpu --screenshot=$@ --window-size=900,2000 http://localhost:18080
+	convert $@ -trim +repage $@
+
 .PHONY: clean
 clean:
 	rm -rf $(OUT_DIR)

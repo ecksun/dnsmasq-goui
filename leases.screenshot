@@ -1,0 +1,9 @@
+1772665427 aa:bb:cc:01:23:45 192.168.1.10 printer 01:aa:bb:cc:01:23:45
+1772665144 aa:bb:cc:11:22:33 192.168.1.15 living-room-tv 01:aa:bb:cc:11:22:33
+1772663982 aa:bb:cc:22:33:44 192.168.1.20 laptop-alice 01:aa:bb:cc:22:33:44
+1772660367 aa:bb:cc:33:44:55 192.168.1.25 laptop-bob 01:aa:bb:cc:33:44:55
+1772658727 aa:bb:cc:44:55:66 192.168.1.30 kitchen-speaker 01:aa:bb:cc:44:55:66
+1772655377 aa:bb:cc:66:77:88 192.168.1.40 * 01:aa:bb:cc:66:77:88
+1772649908 aa:bb:cc:99:aa:bb 192.168.1.55 smart-thermostat 01:aa:bb:cc:99:aa:bb
+1772649609 aa:bb:cc:aa:bb:cc 192.168.1.60 garage-camera 01:aa:bb:cc:aa:bb:cc
+1772647198 aa:bb:cc:dd:ee:ff 192.168.1.75 * 01:aa:bb:cc:dd:ee:ff
