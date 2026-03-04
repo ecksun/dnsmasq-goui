@@ -10,5 +10,4 @@ Download the `.deb` package from [releases](../../releases), then:
 
 ```sh
 sudo dpkg -i dnsmasq-goui-*.deb
-sudo systemctl enable --now dnsmasq-goui
 ```

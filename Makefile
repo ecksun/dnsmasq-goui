@@ -21,7 +21,16 @@ $(PACKAGE_DIR)/DEBIAN/control: debian/control
 $(PACKAGE_DIR)/lib/systemd/system/dnsmasq-goui.service: dnsmasq-goui.service
 	install -D -m 644 $< $@
 
-$(PACKAGE_DIR).deb: $(PACKAGE_DIR)/usr/bin/$(NAME) $(PACKAGE_DIR)/DEBIAN/control $(PACKAGE_DIR)/lib/systemd/system/dnsmasq-goui.service
+$(PACKAGE_DIR)/DEBIAN/postinst: debian/postinst
+	install -D -m 755 $< $@
+
+$(PACKAGE_DIR)/DEBIAN/prerm: debian/prerm
+	install -D -m 755 $< $@
+
+$(PACKAGE_DIR)/DEBIAN/postrm: debian/postrm
+	install -D -m 755 $< $@
+
+$(PACKAGE_DIR).deb: $(PACKAGE_DIR)/usr/bin/$(NAME) $(PACKAGE_DIR)/DEBIAN/control $(PACKAGE_DIR)/lib/systemd/system/dnsmasq-goui.service $(PACKAGE_DIR)/DEBIAN/postinst $(PACKAGE_DIR)/DEBIAN/prerm $(PACKAGE_DIR)/DEBIAN/postrm
 	fakeroot dpkg-deb --build $(PACKAGE_DIR)
 
 .PHONY: deb
