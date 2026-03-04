@@ -1,0 +1,5 @@
+Package: dnsmasq-goui
+Architecture: amd64
+Maintainer: linus <linus.wallgren@netinsight.net>
+Depends:
+Description: Web UI and JSON API for dnsmasq DHCP leases
