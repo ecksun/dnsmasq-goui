@@ -4,6 +4,10 @@ VERSION_NUMBER = $(shell echo $(VERSION) | cut -c2-)
 OUT_DIR = build
 PACKAGE_DIR = $(OUT_DIR)/$(NAME)-$(VERSION)
 
+GH_VERSION = 2.83.1
+GH_ARCHIVE = $(OUT_DIR)/tmp/gh_$(GH_VERSION)_linux_amd64.tar.gz
+GH = $(OUT_DIR)/tmp/gh_$(GH_VERSION)_linux_amd64/bin/gh
+
 $(OUT_DIR)/$(NAME): main.go go.mod
 	go build -o $@ .
 
@@ -22,3 +26,23 @@ $(PACKAGE_DIR).deb: $(PACKAGE_DIR)/usr/bin/$(NAME) $(PACKAGE_DIR)/DEBIAN/control
 
 .PHONY: deb
 deb: $(PACKAGE_DIR).deb
+
+$(OUT_DIR)/tmp/:
+	mkdir -p $@
+
+$(GH_ARCHIVE): | $(OUT_DIR)/tmp/
+	curl -L https://github.com/cli/cli/releases/download/v$(GH_VERSION)/gh_$(GH_VERSION)_linux_amd64.tar.gz -o $@
+
+$(GH): $(GH_ARCHIVE)
+	tar -xf $(GH_ARCHIVE) --directory $(OUT_DIR)/tmp/ gh_$(GH_VERSION)_linux_amd64/bin/gh
+	touch $@
+
+.PHONY: release
+release: $(GH) $(PACKAGE_DIR).deb $(OUT_DIR)/$(NAME)
+	$(GH) release create --verify-tag --notes-from-tag "$(VERSION)" \
+		"$(PACKAGE_DIR).deb" \
+		"$(OUT_DIR)/$(NAME)"
+
+.PHONY: clean
+clean:
+	rm -rf $(OUT_DIR)
