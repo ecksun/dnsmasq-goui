@@ -1,0 +1,37 @@
+[Unit]
+Description=Web UI and JSON API for dnsmasq DHCP leases
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/dnsmasq-goui -leases /var/lib/misc/dnsmasq.leases -listen :8080
+DynamicUser=yes
+Restart=on-failure
+SyslogIdentifier=dnsmasq-viewer
+
+# Security settings
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+ReadOnlyPaths=/
+ReadWritePaths=/var/log
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictRealtime=true
+RestrictSUIDSGID=true
+RemoveIPC=true
+PrivateTmp=true
+
+# Network settings
+RestrictAddressFamilies=AF_INET AF_INET6
+IPAddressDeny=any
+IPAddressAllow=localhost
+IPAddressAllow=10.0.0.0/8
+IPAddressAllow=172.16.0.0/12
+IPAddressAllow=192.168.0.0/16
+
+# File system access
+BindReadOnlyPaths=/var/lib/misc/dnsmasq.leases
+
+[Install]
+WantedBy=multi-user.target
